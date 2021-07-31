@@ -1,0 +1,84 @@
+<div class="formCont">
+    <h1>{{id+1}}</h1>
+    <form [formGroup]="userForm">
+        <div class="form-group">
+            <label class="form-label">First Name<span> *</span></label>
+            <input type="text" class="form-control" formControlName="fname" />
+            <div *ngIf='userForm.controls["fname"].errors && userForm.controls["fname"].touched'>
+                <div *ngIf="userForm.controls['fname'].errors.required" class="form-error">
+                    Please enter a name
+                </div>
+                <div *ngIf="userForm.controls['fname'].errors.minlength" class="form-error">
+                    Min length for name is 3
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Last Name<span> *</span></label>
+            <input type="text" class="form-control" formControlName="lname" />
+            <div *ngIf='userForm.controls["lname"].errors && userForm.controls["lname"].touched'>
+                <div *ngIf="userForm.controls['lname'].errors.required" class="form-error">
+                    Please enter last name
+                </div>
+                <div *ngIf="userForm.controls['lname'].errors.minlength" class="form-error">
+                    Min length for last name is 3
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Email<span> *</span></label>
+            <input type="text" class="form-control" formControlName="email" />
+            <div *ngIf='userForm.controls["email"].errors && userForm.controls["email"].touched'>
+                <div *ngIf="userForm.controls['email'].hasError('pattern')" class="form-error">
+                    This is not valid email
+                </div>
+                <div *ngIf="userForm.controls['email'].errors.required" class="form-error">
+                    Please enter email
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Rate</label>
+            <input type="number" class="form-control" formControlName="rate" />
+            <div *ngIf='userForm.controls["rate"].errors && userForm.controls["rate"].touched'>
+                <div *ngIf="userForm.controls['rate'].errors.min || userForm.controls['rate'].errors.max"
+                    class="form-error">
+                    Enter a number in 1-10
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Password<span> *</span></label>
+            <input type="password" class="form-control" formControlName="psw" />
+            <div *ngIf='(userForm.controls["psw"].errors && userForm.controls["psw"].touched)'>
+                <div *ngIf="userForm.controls['psw'].hasError('pattern')" class="form-error">
+                    Password must contain
+                    <ul>
+                        <li>At least 8 characters</li>
+                        <li>Lowercase letter</li>
+                        <li>Uppercase letter</li>
+                        <li>Numbers</li>
+                        <li>At least one of this symbols @$!%*?&</li>
+                    </ul>
+                </div>
+                <div *ngIf="userForm.controls['psw'].errors.required" class="form-error">Please enter password</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Confirm Password<span> *</span></label>
+            <input type="password" class="form-control" formControlName="confirmPsw" />
+            <div *ngIf="userForm.controls['confirmPsw'].errors && userForm.controls['confirmPsw'].touched">
+                <div *ngIf="userForm.controls['confirmPsw'].errors.required" class="form-error">
+                    Confirm password
+                </div>
+                <div *ngIf="userForm.controls['confirmPsw'].errors.mustMatch" class="form-error">
+                    Passwords doesn't match
+                </div>
+            </div>
+        </div>
+        <div class="btn-cont">
+            <button (click)='add()'>Add</button>
+            <button class="remove-btn" (click)='delete()' *ngIf='id !== 0'>Remove</button>
+        </div>
+    </form>
+</div>
